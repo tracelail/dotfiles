@@ -1,0 +1,9 @@
+zsh
+git
+curl
+wget
+jq
+conky-all
+sassc
+gtk2-engines-murrine
+fontconfig

@@ -3,22 +3,61 @@
 My Linux desktop configuration for Debian 12 (Cinnamon).
 
 ## What's included
+- **Shell**: Zsh + Oh My Zsh + Powerlevel9k theme + Powerline fonts
 - **Conky**: Mimosa Verdant theme (weather, system stats, network)
 - **GTK Theme**: Orchis-Dark
 - **Icons**: Tela
 
+---
+
 ## Install on a new machine
+
 ```bash
-git clone https://github.com/YOUR_USERNAME/dotfiles.git
+git clone https://github.com/tracelail/dotfiles.git
 cd dotfiles
-bash install.sh
 ```
+
+### Full install
+```bash
+make all
+```
+
+### Or install individual components
+```bash
+make packages   # apt packages only
+make zsh        # Zsh + Oh My Zsh + Powerlevel9k
+make themes     # Orchis-Dark + Tela icons
+make conky      # Mimosa Conky theme
+```
+
+### See all available commands
+```bash
+make help
+```
+
+> **Note:** `install.sh` is also available if you prefer plain bash over make.
 
 ---
 
 ## Post-install: Required Manual Steps
 
-### 1. OpenWeatherMap API Key & City ID
+### 1. Terminal Font (Zsh / Powerlevel9k)
+
+Powerline fonts are installed automatically but you need to select one in your terminal:
+
+- Open Terminal → **Preferences** → select your profile → **Text** tab
+- Uncheck **"Use the system fixed width font"**
+- Choose a Powerline font e.g. `DejaVu Sans Mono for Powerline`
+- Restart your terminal
+
+**References:**
+- https://ohmyz.sh/#install
+- https://github.com/Powerlevel9k/powerlevel9k#installation
+- https://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation
+
+---
+
+### 2. OpenWeatherMap API Key & City ID
 
 The Conky weather widget requires a free OpenWeatherMap account.
 
@@ -30,8 +69,7 @@ The Conky weather widget requires a free OpenWeatherMap account.
 3. Go to your profile → **My API Keys** and copy your key
 4. **Important:** New API keys take a few hours to activate after account creation
 5. Find your city ID by going to https://old.openweathermap.org (the new site no longer shows IDs in the URL)
-   - Search for your city
-   - Click on it
+   - Search for your city → click on it
    - Copy the number at the end of the URL: `https://old.openweathermap.org/city/XXXXXXX`
 6. Edit the weather script:
 ```bash
@@ -52,20 +90,24 @@ sed -i 's/api_key=.*/api_key=YOUR_API_KEY/' ~/.config/conky/Mimosa/scripts/weath
 rm ~/.cache/weather.json
 ```
 
-### 2. Network Interface
+---
+
+### 3. Network Interface
 
 The network widget needs your actual interface name. Find it with:
 ```bash
 ip link
 ```
-Look for the interface that shows `state UP` — it will be something like `wlp2s0` or `eth0`.
+Look for the interface showing `state UP` — it will be something like `wlp2s0` or `eth0`.
 
 Then update the Conky config:
 ```bash
 sed -i 's/wlp9s0/YOUR_INTERFACE_NAME/g' ~/.config/conky/Mimosa/Mimosa.conf
 ```
 
-### 3. Theme Activation (Cinnamon)
+---
+
+### 4. Theme Activation (Cinnamon)
 
 After install, apply the themes manually:
 - Open **System Settings → Themes**
@@ -73,7 +115,9 @@ After install, apply the themes manually:
 - Set **Desktop** → `Orchis-Dark`
 - Set **Icons** → `Tela`
 
-### 4. Start Conky
+---
+
+### 5. Start Conky
 ```bash
 cd ~/.config/conky/Mimosa && bash start.sh
 ```
@@ -82,10 +126,32 @@ Conky is set to autostart on login via `~/.config/autostart/conky.desktop` with 
 
 ---
 
+## Repo Structure
+
+```
+dotfiles/
+├── Makefile                  # Run make help to see all commands
+├── install.sh                # Alternative plain bash installer
+├── packages.txt              # apt packages list
+├── configs/
+│   ├── zsh/
+│   │   └── .zshrc            # Zsh config with Powerlevel9k
+│   ├── conky/
+│   │   └── Mimosa/           # Mimosa Verdant Conky theme
+│   └── themes/
+│       └── Orchis-Dark/      # GTK theme
+└── README.md
+```
+
+---
+
 ## Theme Sources & Credits
 
 | Component | Source |
 |-----------|--------|
+| Zsh | https://ohmyz.sh |
+| Powerlevel9k | https://github.com/Powerlevel9k/powerlevel9k |
+| Powerline Fonts | https://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation |
 | Conky Mimosa Verdant | https://www.gnome-look.org/p/1869486 — by closebox73 |
 | Conky install guide | https://malformed-blog.blogspot.com/2025/02/how-to-apply-theme.html |
 | Orchis-Dark GTK | https://www.gnome-look.org/p/1357889 — by vinceliuice |
@@ -94,6 +160,9 @@ Conky is set to autostart on login via `~/.config/autostart/conky.desktop` with 
 ---
 
 ## Troubleshooting
+
+**Powerlevel9k prompt not rendering correctly**
+Make sure your terminal font is set to a Powerline font. See Manual Step 1 above.
 
 **Black background behind Conky widgets**
 Edit `~/.config/conky/Mimosa/Mimosa.conf` and ensure:
