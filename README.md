@@ -7,6 +7,7 @@ My Linux desktop configuration for Debian 12 (Cinnamon).
 - **Conky**: Mimosa Verdant theme (weather, system stats, network)
 - **GTK Theme**: Orchis-Dark
 - **Icons**: Tela
+- **Neofetch**: System info tool
 
 ---
 
@@ -156,6 +157,7 @@ dotfiles/
 | Conky install guide | https://malformed-blog.blogspot.com/2025/02/how-to-apply-theme.html |
 | Orchis-Dark GTK | https://www.gnome-look.org/p/1357889 — by vinceliuice |
 | Tela Icons | https://github.com/vinceliuice/Tela-icon-theme — by vinceliuice |
+| Neofetch | https://github.com/dylanaraps/neofetch |
 
 ---
 

@@ -7,3 +7,4 @@ conky-all
 sassc
 gtk2-engines-murrine
 fontconfig
+neofetch
