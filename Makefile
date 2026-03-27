@@ -1,6 +1,6 @@
 .PHONY: all packages zsh themes conky help
 
-all: packages zsh themes conky  ## Run full install
+all: packages zsh themes conky redshift ## Run full install
 
 help:  ## Show available commands
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36mmake %-10s\033[0m %s\n", $$1, $$2}'
@@ -41,3 +41,7 @@ conky:  ## Install Mimosa Conky theme + autostart
 	@printf '[Desktop Entry]\nType=Application\nName=Conky\nExec=bash -c "sleep 10 && cd ~/.config/conky/Mimosa && bash start.sh"\nStartupNotify=false\nTerminal=false\n' > ~/.config/autostart/conky.desktop
 	@echo ""
 	@echo "MANUAL: See README.md to configure weather API key and network interface"
+
+redshift:  ## Install Redshift night light config
+	cp configs/redshift/redshift.conf ~/.config/redshift.conf
+	@echo "MANUAL: Launch redshift-gtk from application menu"

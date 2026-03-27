@@ -90,3 +90,13 @@ echo "    MANUAL STEP: Configure Conky weather + network"
 echo "    See README.md for full instructions"
 echo ""
 echo "==> All done! Please log out and back in for zsh to take effect."
+
+# ─── Redshift ────────────────────────────────────────────────────────
+# Blue light filter for night time use
+
+echo "==> Installing Redshift config..."
+cp configs/redshift/redshift.conf ~/.config/redshift.conf
+
+echo ""
+echo "    MANUAL STEP: Launch Redshift from application menu"
+echo "    or run: redshift-gtk &"

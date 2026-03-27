@@ -8,3 +8,5 @@ sassc
 gtk2-engines-murrine
 fontconfig
 neofetch
+redshift
+redshift-gtk
